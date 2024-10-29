@@ -38,14 +38,6 @@ spec:
       activeService: rollout-ngnix-active # <- matches Active Service metadata 
       previewService: rollout-ngnix-preview # <- matches Preview Service metadata
 
-      prePromotionAnalysis:
-        templates:
-        - templateName: promotion-analysis
-
-      postPromotionAnalysis:
-        templates:
-        - templateName: promotion-analysis
-
       previewReplicaCount: 2
       autoPromotionEnabled: true
       autoPromotionSeconds: 1
