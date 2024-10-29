@@ -40,13 +40,13 @@ spec:
 
       prePromotionAnalysis:
         templates:
-        - templateName: pre-promotion-analysis
+        - templateName: promotion-analysis
         args:
         - name: rollout-ngnix-preview
 
       postPromotionAnalysis:
         templates:
-        - templateName: post-promotion-analysis
+        - templateName: promotion-analysis
 
       previewReplicaCount: 2
       autoPromotionEnabled: true
