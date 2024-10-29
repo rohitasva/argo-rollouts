@@ -41,8 +41,6 @@ spec:
       prePromotionAnalysis:
         templates:
         - templateName: promotion-analysis
-        args:
-        - name: rollout-ngnix-preview
 
       postPromotionAnalysis:
         templates:
