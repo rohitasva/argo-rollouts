@@ -4,7 +4,7 @@ metadata:
   name: rollout-ngnix-active # <- active 
 spec:
   selector:
-    app: ngnix
+    app: my-app
   ports:
   - protocol: TCP
     port: 80
