@@ -37,11 +37,5 @@ spec:
 
       activeService: rollout-ngnix-active # <- matches Active Service metadata 
       previewService: rollout-ngnix-preview # <- matches Preview Service metadata
-
-      previewReplicaCount: 2
-      autoPromotionEnabled: true
-      autoPromotionSeconds: 1
-      scaleDownDelaySeconds: 30
-
-      # 0 means not to scale down
-      abortScaleDownDelaySeconds: 30
+      
+      autoPromotionEnabled: false
