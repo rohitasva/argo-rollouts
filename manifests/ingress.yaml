@@ -15,6 +15,7 @@ spec:
         - pathType: Prefix
           path: /active
           backend:
-            service: rollout-ngnix-active
-            port:
-              number: 8080
+            service: 
+              name: rollout-ngnix-active
+              port:
+                number: 8080
