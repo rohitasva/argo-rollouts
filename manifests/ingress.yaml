@@ -6,7 +6,8 @@ metadata:
     ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - host: blue-green.local
+    http:
       paths:
         - pathType: Prefix
           path: /active
