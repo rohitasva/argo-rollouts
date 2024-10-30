@@ -10,7 +10,7 @@ spec:
 
   selector:
     matchLabels:
-      app: ngnix
+      app: my-app
 
   template:
     metadata:
