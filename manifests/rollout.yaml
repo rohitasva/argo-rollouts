@@ -18,15 +18,11 @@ spec:
         app: my-app
     spec:
       containers:
-      - name: ngnix
-        image: nginx:1.20.0
+      - name: rollout-demo
+        image: argoproj/rollouts-demo:blue 
+        imagePullPolicy: Always
         ports:
-        - name: http
-          containerPort: 80
-          protocol: TCP
-        resources:
-          limits:
-            cpu: 10m
+          - containerPort: 8080
 
   rollbackWindow:
     revisions: 3
