@@ -8,7 +8,9 @@ spec:
   rules:
   - http:
       paths:
-        - path: /active
+        - pathType: Prefix
+          path: /active
           backend:
-            serviceName: rollout-ngnix-active
-            servicePort: 8080
+            service: rollout-ngnix-active
+            port:
+              number: 8080
