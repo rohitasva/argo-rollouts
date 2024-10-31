@@ -9,11 +9,11 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-  - host: blue-green.local
+  - host: blue-green.active.local
     http:
       paths:
         - pathType: Prefix
-          path: /active
+          path: /
           backend:
             service: 
               name: rollout-ngnix-active
