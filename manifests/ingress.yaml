@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: blue-green-ingress-active
+  name: blue-green-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
@@ -19,3 +19,14 @@ spec:
               name: rollout-ngnix-active
               port:
                 number: 80
+  - host: blue-green.preview.local
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service: 
+              name: rollout-ngnix-preview
+              port:
+                number: 80
+
