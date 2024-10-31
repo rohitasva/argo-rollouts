@@ -9,21 +9,21 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-  - host: blue-green.active.local
+  - host: blue-green.local
     http:
       paths:
         - pathType: Prefix
-          path: /
+          path: /active
           backend:
             service: 
               name: rollout-ngnix-active
               port:
                 number: 80
-  - host: blue-green.preview.local
+  - host: blue-green.local
     http:
       paths:
         - pathType: Prefix
-          path: /
+          path: /preview
           backend:
             service: 
               name: rollout-ngnix-preview
