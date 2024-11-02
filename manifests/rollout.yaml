@@ -21,7 +21,7 @@ spec:
       containers:
       - name: rollout-demo
         image: argoproj/rollouts-demo:blue
-        imagePullPolicy: NotPresent
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8080
 
