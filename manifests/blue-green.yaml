@@ -1,0 +1,95 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: blue-green
+spec:
+  replicas: 2
+
+  analysis:
+    successfulRunHistoryLimit: 3
+    unsuccessfulRunHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: blue-green
+
+  template:
+    metadata:
+      labels:
+        app: blue-green
+    spec:
+      containers:
+      - name: rollout-demo
+        image: argoproj/rollouts-demo:blue
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+
+  rollbackWindow:
+    revisions: 3
+
+  strategy:
+
+    blueGreen:
+
+      activeService: rollout-ngnix-active # <- matches Active Service metadata
+      previewService: rollout-ngnix-preview # <- matches Preview Service metadata
+
+      autoPromotionEnabled: false
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rollout-ngnix-active # <- active
+spec:
+  selector:
+    app: blue-green
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rollout-ngnix-preview # <- preview
+spec:
+  selector:
+    app: blue-green
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blue-green-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    alb.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  rules:
+  - host: blue-green.active.local
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: rollout-ngnix-active
+              port:
+                number: 80
+  - host: blue-green.preview.local
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: rollout-ngnix-preview
+              port:
+                number: 80
