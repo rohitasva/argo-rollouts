@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: rollout-demo
-        image: argoproj/rollouts-demo:blue
+        image: argoproj/rollouts-demo:green
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8080
@@ -29,12 +29,12 @@ spec:
     revisions: 3
 
   strategy:
-
     blueGreen:
-
       activeService: rollout-ngnix-active # <- matches Active Service metadata
       previewService: rollout-ngnix-preview # <- matches Preview Service metadata
-
+      prePromotionAnalysis:
+        templates:
+        - templateName: success-rate
       autoPromotionEnabled: false
 
 ---

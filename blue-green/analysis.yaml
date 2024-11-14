@@ -1,10 +1,10 @@
-kind: ClusterAnalysisTemplate
 apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
 metadata:
-  name: promotion-analysis
+  name: success-rate
 spec:
   metrics:
-    - name: promotion-analysis
+    - name: success-rate
       count: 1
       interval: 5s
       failureLimit: 1
